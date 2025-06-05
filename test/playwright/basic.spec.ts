@@ -26,4 +26,15 @@ test('should display the airdrop form if connected to metamask otherwise not', a
   })
   await page.getByTestId('rk-wallet-option-io.metamask').click();
   await metamask.connectToDapp();
+
+  const customNetwork = {
+    name: "Anvil",
+    rpcUrl: "http://127.0.0.1:8545",
+    chainId: 31337,
+    symbol: "ETH",
+  } 
+
+  await metamask.addNetwork(customNetwork);
+
+  await expect(page.getByText('Token Address')).toBeVisible();
 });
